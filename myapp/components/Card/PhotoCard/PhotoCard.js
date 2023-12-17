@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PhotoCard = ({url}) => {
+const PhotoCard = ({url, onClick}) => {
   return (
     <div className='flex'>
         <div className='flex'>
@@ -11,7 +11,11 @@ const PhotoCard = ({url}) => {
             height={60}
             priority
             />
+            
         </div>
+        <button
+        onClick={onClick}
+        type='button'>Delete</button>
     </div>
   )
 }

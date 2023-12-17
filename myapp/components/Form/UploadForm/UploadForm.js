@@ -1,4 +1,5 @@
 'use client'
+import ButtonSubmit from '@/components/Card/ButtonSubmit/ButtonSubmit';
 import PhotoCard from '@/components/Card/PhotoCard/PhotoCard';
 import React from 'react'
 import { useRef, useState } from 'react'
@@ -16,6 +17,7 @@ const UploadForm = () => {
             }
         })
         setFiles(prev => [...newFiles, ...prev])
+        formRef.current.reset()
     }
 
     const handleDrop = (e) => {
@@ -23,6 +25,13 @@ const UploadForm = () => {
         const data = e.dataTransfer;
         handleInputFiles({ target: { files: data.files } });
       };
+
+      
+      async function handleDeleteFiles(index){
+        const newFiles = files.filter((_, i) => i !== index)
+        setFiles(newFiles)
+      }
+
   return (
     <form
     action=''
@@ -55,12 +64,14 @@ const UploadForm = () => {
         {
             files.map((file, index) => (
                 <div className='flex gap-4'>
-<PhotoCard key={index} url={URL.createObjectURL(file)} />
+                    <PhotoCard 
+                    onClick={() => handleDeleteFiles(index)}
+                    key={index} url={URL.createObjectURL(file)} />
                 </div>
             ))
         }
     </div>
-        
+        <ButtonSubmit value="Submit" />
     </form>
   )
 }
