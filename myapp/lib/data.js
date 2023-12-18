@@ -1,13 +1,37 @@
-import User from "@/models/User";
+import Category from "@/models/Category";
 import db from "./db";
+import Banner from "@/models/Banner";
+import Product from "@/models/Product";
 
-export const fetchUsers = async () => {
-    db.connect()
+export const fetchBanner = async() => {
     try {
-        const users = await User.find()
-        return users
+        db.connect()
+        const banners = await Banner.find()
+        return banners
     } catch (error) {
-        console.log(err)
-        throw new Error("Failed to fetch users")
+        
     }
 }
+export const fetchCategories = async() => {
+    try {
+        db.connect()
+        const categories = await Category.find()
+        return categories
+    } catch (error) {
+        
+    }
+}
+
+export const fetchCategory = async(id) => {
+    try {
+        db.connect()
+        const category = await Category.findById(id)
+
+    
+        return category;
+    } catch (error) {
+        
+    }
+}
+
+

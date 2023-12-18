@@ -1,9 +1,7 @@
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from '@/models/User';
-import bcrypt from "bcrypt";
 import db from '@/lib/db';
-
+import User from '@/models/User';
 
 export const options = {
     providers: [
@@ -21,13 +19,8 @@ export const options = {
                 id: profile.sub,
                 role: userRole,
                 name: profile.name.replace(" ", "").toLowerCase(),
-                avatar: profile.picture,
-                public_id: "",
-                followers: [],
-                following: [],
-                total_followers: 0,
-                total_following: 0
-              };
+                wishList: [],
+             };
             },
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -50,12 +43,8 @@ export const options = {
               await User.create({
                 email: profile.email,
                 name: profile.name.replace(" ", "").toLowerCase(),
-                avatar: profile.picture,
-                public_id: "",
-                followers: [],
-                following: [],
-                total_followers: 0,
-                total_following: 0
+                wishList: [],
+           
               });
             }
     

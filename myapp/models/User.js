@@ -9,18 +9,11 @@ const UserSchema = new mongoose.Schema({
       name: {
         type: String,
         required: [true, 'Name is required!'],
-        unique: true
 
       },
-      avatar: String,
-      public_id: String,
-      followers: [{
+      wishList: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      }],
-      following: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Product'
       }]
 }, {timestamps: true})
 
